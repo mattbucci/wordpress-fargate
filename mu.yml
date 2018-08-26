@@ -135,7 +135,7 @@ service:
     USER_UPLOAD_BUCKET: ${UserUploadBucket}
     USER_UPLOAD_REGION: us-west-2
     SSM_USER_UPLOAD_KEY_PARAM: ${AccessKey}
-    SSM_USER_UPLOAD_SAK_PARAM: ${AccessKeySecret} 
+    SSM_USER_UPLOAD_SAK_PARAM: ${AccessKeySecure} 
   pipeline:
     source:
       provider: GitHub
