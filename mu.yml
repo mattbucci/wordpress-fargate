@@ -141,7 +141,7 @@ service:
       provider: GitHub
       repo: mattbucci/wordpress-fargate
     acceptance:
-      disabled: false
+      disabled: true
       environment: acceptance
     production:
       disabled: false
