@@ -70,6 +70,16 @@ templates:
         Type: AWS::S3::Bucket
   mu-iam-service-wordpress-fargate-production:
     Resources:
+      EcsTaskRole:
+        Properties:
+          Policies:
+          - PolicyName: get-secrets
+            PolicyDocument:
+              Statement:
+              - Effect: Allow
+                Action:
+                - ssm:GetParameter
+                Resource: '*'
       ImageUploadUser:
         Type: AWS::IAM::User
         Properties:
@@ -117,12 +127,12 @@ templates:
 # Service Configuration
 service:
   name: wordpress-fargate
-  desiredCount: 2
-  minSize: 2
-  maxSize: 10
+  desiredCount: 1
+  minSize: 0
+  maxSize: 4
   port: 80
-  cpu: 1024
-  memory: 1024
+  cpu: 512
+  memory: 512
   targetCPUUtilization: 75
   healthEndpoint: /
   pathPatterns:
@@ -151,7 +161,7 @@ service:
   database:
       name: wordpress
       engine: aurora
-      instanceClass: db.t2.small
+      engineMode: serverless
       iamAuthentication: false
       masterUsername: admin
       allocatedStorage: 10
